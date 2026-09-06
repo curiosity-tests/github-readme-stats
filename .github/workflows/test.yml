@@ -3,7 +3,8 @@ on:
   workflow_dispatch:
     inputs:
       leg:
-        description: baseline (uninstrumented) or instrumented (under chalk/curiosity)
+        description:
+          baseline (uninstrumented) or instrumented (under chalk/curiosity)
         type: choice
         options: [instrumented, baseline]
         default: instrumented
@@ -31,7 +32,8 @@ permissions:
 env:
   # The one variable that separates the arms: on baseline, action-checkout
   # skips its Set up Chalk step entirely.
-  CHALK_ON: ${{ github.event_name == 'workflow_dispatch' && inputs.leg != 'baseline' }}
+  CHALK_ON:
+    ${{ github.event_name == 'workflow_dispatch' && inputs.leg != 'baseline' }}
 
 run-name: "Test ${{ inputs.leg || 'push' }} ${{ inputs.racecar_run }}"
 
